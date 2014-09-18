@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+{% load bestwatch_extras %}
+
+<div class="container">
+    <div class="row-fluid spacetop">
+        <div class="span3">
+            <img src="{{ profile_pic|check_profpic }}" 
+                width="150" height="150" class="img-circle" style="width:150px;height:150px;" alt="">
+            {% if form %}            
+            <form action="/bestwatch/user/edit/" method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			<p>{{ form.non_field_errors }}</p>
+			<p>{{ form.profpic.label_tag }} {{ form.profpic.help_text }}</p>
+			<p>
+				{{ form.profpic.errors }}
+				{{ form.profpic }}
+			</p>
+			<p><input type="submit" value="Upload" class="btn btn-success" /></p>
+    		</form>
+            {% endif %}
+                
+        </div>
+        <div class="span6 blogbox">
+            <h1>Name: {{ name }}</h1>
+            <h3>Email: {{ email }}</h3>
+            <h3>Role: Reviewer</h3>
+        </div>
+        <div class="span3">
+            <div class="sidebar">
+                <div class="widget">
+                    <h1>Recent Activity</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
